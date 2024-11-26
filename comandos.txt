@@ -1,0 +1,70 @@
+# Inicio
+npm init -y
+
+# Instalar TypeScript y demás dependencias
+npm i -D typescript @types/node ts-node-dev rimraf
+
+# Inicializar el archivo de configuración de TypeScript ( Se puede configurar al gusto)
+npx tsc --init --outDir dist/ --rootDir src
+
+# Crear scripts para dev, build y start (Más sobre TS-Node-dev aquí)
+"dev": "tsnd --respawn --clear src/app.ts",
+"build": "rimraf ./dist && tsc",
+"start": "node dist/app.js"
+
+**********tsconfig.json**********
+"exclude": ["node_modules", "dist", "src/**/*.test.ts", "**/*.spec.ts","**/*.test.ts"],
+  "include": ["src/**/*"],
+  "compilerOptions": {TODO LO DEMAS}
+
+# Instalar Express
+npm i express
+
+# Despues de instalar express, se debe instalar su versión de TypeScript(tiene que ser lo mas cercano posible)
+"devDependencies": {
+    "@types/express": "^4.17.0",
+  },
+  "dependencies": {
+    "express": "^4.21.1"
+  }
+
+#En caso de error de lo anterior, hacer esto
+
+# Elimina la carpeta node_modules y el archivo package-lock.json (opcional, para evitar conflictos)
+rm -rf node_modules package-lock.json
+
+# Reinstala las dependencias
+npm install
+
+"devDependencies": {
+    "@types/express": "^4.17.17",
+    "@types/node": "^22.9.3",
+    "rimraf": "^6.0.1",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.7.2"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "env-var": "^7.5.0",
+    "express": "^4.18.2"
+  }
+
+
+# Para leer variables de entorno
+npm i dotenv env-var
+
+# Para correr docker en desarrollo
+docker compose up -d
+
+#Todo esto es para Prisma, instalación
+npm install prisma --save-dev
+
+# Proveedor de base de datos(Se agrega el nombre)
+npx prisma init --datasource-provider postgresql
+
+# Correr la migración(Cada vez que se cambie el modelo, ejecutar esto)
+npx prisma migrate dev --name init
+
+# Tener en cuenta, si se borra el contenedor de la BD, se debe ejecutar la migración denuevo
+npx prisma generate
+npx prisma migrate dev
