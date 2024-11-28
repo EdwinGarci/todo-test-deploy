@@ -1,4 +1,5 @@
 import express, { Router } from 'express';
+import compression from 'compression'; // gzip
 import path from 'path';
 
 interface Options {
@@ -24,6 +25,7 @@ export class Server {
         // *Middlewares
         this.app.use(express.json()); // Para leer JSON(raw)
         this.app.use(express.urlencoded({ extended: true })); // Para leer formularios(x-www-form-urlencoded)
+        this.app.use(compression()); // Para comprimir la respuesta
 
         // *Public Folder
         this.app.use(express.static(this.publicPath));
